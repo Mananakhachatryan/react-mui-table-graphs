@@ -4,18 +4,15 @@ import Papa from "papaparse";
 import { ProductTypes, ProductActions } from "./productReducer";
 import { IProduct } from "./product";
 
-// const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&id=${SHEET_ID}&gid=${SHEET_GID}`;
 const CSV_URL = `https://docs.google.com/spreadsheets/d/1hB_LjBT9ezZigXnC-MblT2PXZledkZqBnvV23ssfSuE/export?format=csv`;
 export const getProductsAction = (
   dispatch: React.Dispatch<ProductActions>,
   { search }: { search?: string }
 ) => {
   axios({
-    // url: `https://dummyjson.com/products${search ? `/search?q=${search}` : ""}`,
     url: CSV_URL,
   })
     .then((result: { data: any }) => {
-      // Use PapaParse to parse the CSV data
       Papa.parse(result.data, {
         header: true,
         complete: (parsedResult: any) => {
@@ -26,15 +23,10 @@ export const getProductsAction = (
         },
         error: (error: any) => {
           console.error("CSV parsing error:", error);
-          // dispatch({
-          //   type: ProductTypes.GET_ERROR,
-          //   payload: "An error occurred while parsing data.",
-          // });
         },
       });
     })
     .catch((error) => {
-      debugger;
       dispatch({
         type: ProductTypes.GET_ERROR,
         payload: "An error occurred while fetching data.",
