@@ -14,7 +14,7 @@ const SearchComponent = ({
       display="flex"
       justifyContent="flex-start"
       alignItems="center"
-      sx={{ marginBottom: "10px", marginTop: "50px" }}
+      sx={{ marginBottom: "10px" }}
     >
       <Input
         placeholder="Search"

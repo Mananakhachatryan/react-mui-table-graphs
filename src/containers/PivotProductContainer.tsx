@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo } from "react";
-import { Container } from "@mui/material";
+import { Container, Link } from "@mui/material";
 import { ProductContext } from "../context/productContext";
 import { getProductsAction } from "../context/productAction";
 import PivotTable from "../components/PivotTable";
+import Loader from "../components/Loader";
 
 const PivotProductContainer: React.FC = () => {
   const { dispatch, state } = React.useContext(ProductContext);
@@ -114,12 +115,18 @@ const PivotProductContainer: React.FC = () => {
 
   return (
     <Container>
+      <Link
+        href="/"
+        sx={{ mt: 5, mb: 2, ml: 3, display: "flex", color: "#757575" }}
+      >
+        Dashboard
+      </Link>
       {state.products.data.length > 0 ? (
         <>
           <PivotTable data={data} />
         </>
       ) : (
-        <p>loader</p>
+        <Loader />
       )}
     </Container>
   );

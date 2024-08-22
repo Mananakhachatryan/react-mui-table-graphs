@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Container } from "@mui/material";
+import { Container, Link } from "@mui/material";
 import ProductContent from "../components/ProductContent";
 import SearchComponent from "../components/SearchComponent/SearchComponent";
 import { ProductContext } from "../context/productContext";
@@ -9,6 +9,8 @@ import MuiAlert from "@mui/material/Alert";
 import Pagination from "@mui/material/Pagination";
 import IProduct from "../context/product";
 import BarCharts from "../components/BarChart";
+import Loader from "../components/Loader";
+
 const ProductContainer: React.FC = () => {
   const { dispatch, state } = React.useContext(ProductContext);
   const [error, setError] = useState<string | null>(null);
@@ -95,6 +97,12 @@ const ProductContainer: React.FC = () => {
 
   return (
     <Container>
+      <Link
+        href="/pivot-table"
+        sx={{ mt: 5, mb: 1, display: "flex", color: "#757575" }}
+      >
+        Pivot Table
+      </Link>
       {state.products.data.length > 0 ? (
         <>
           <SearchComponent value={searchQuery} handleSearch={handleSearch} />
@@ -112,7 +120,7 @@ const ProductContainer: React.FC = () => {
           />
         </>
       ) : (
-        <p>loader</p>
+        <Loader />
       )}
 
       <Snackbar
